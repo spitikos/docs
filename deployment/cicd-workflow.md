@@ -8,7 +8,8 @@ The project is split into multiple repositories to enforce separation of concern
 
 - **Application Repositories** (e.g., `spitikos/homepage`): Contain the source code for a single application.
 - **`spitikos/charts`**: A dedicated repository containing all Helm charts.
-- **`spitikos/spitikos`**: The central repository containing Argo CD manifests, documentation, and reusable CI/CD workflows.
+- **`spitikos/docs`**: A dedicated repository containing all project documentation.
+- **`spitikos/spitikos`**: The central repository containing Argo CD manifests and reusable CI/CD workflows.
 
 ## 2. The CI/CD Pipeline: From Code to Live Deployment
 

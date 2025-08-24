@@ -36,6 +36,6 @@ The platform is organized across multiple repositories in the `spitikos` organiz
 - **`spitikos/spitikos`**: The central repository. It contains:
   - `argocd/`: Argo CD application manifests that define what should be deployed.
   - `.github/workflows/`: Reusable GitHub Actions workflows for CI/CD.
-  - `docs/`: All project documentation.
-- **`spitikos/charts`**: Contains all the Helm charts for deploying applications and platform services.
+- **`spitikos/docs`**: Contains all project documentation.
+- **`spitkos/charts`**: Contains all the Helm charts for deploying applications and platform services.
 - **`spitikos/<app-name>`** (e.g., `spitikos/homepage`): Each application has its own repository containing its source code and a CI workflow file.
