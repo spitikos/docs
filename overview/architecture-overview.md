@@ -23,6 +23,7 @@ The platform consists of several key layers:
 | **Hardware**                | Raspberry Pi 5    | The physical server running the platform.                                                          |
 | **Operating System**        | Ubuntu Server     | The base OS for the Raspberry Pi.                                                                  |
 | **Container Orchestration** | k3s               | A lightweight, certified Kubernetes distribution.                                                  |
+| **Autoscaling**             | KEDA              | Provides event-driven, scale-to-zero autoscaling for applications.                                 |
 | **Public Ingress**          | Cloudflare Tunnel | Provides a secure, outbound-only connection to the Cloudflare network, handling TLS termination.   |
 | **Internal Ingress**        | NGINX             | Routes traffic within the cluster from the tunnel to the correct service based on hostname.        |
 | **Application Packaging**   | Helm              | Manages Kubernetes deployments using a reusable "wrapper chart" pattern.                           |

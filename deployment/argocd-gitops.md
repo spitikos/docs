@@ -16,26 +16,36 @@ The `spitikos/charts` repository is the single source of truth for what is runni
 
 ## 2. Argo CD Architecture
 
-### Installation and Configuration
+### Installation
 
-Argo CD is a core platform component, but it is also managed via GitOps just like any other application.
+Argo CD is a core platform component. It is installed and managed via a dedicated **wrapper chart** located in the `spitikos/charts` repository at `charts/argocd`.
 
-- **Wrapper Chart:** The configuration is defined in a dedicated **wrapper chart** located in the `spitikos/charts` repository at `charts/argocd`. This chart includes the official `argo-cd` chart as a dependency.
-- **Declarative Configuration:** All configuration, including ingress, is defined in the `charts/argocd/values.yaml` file.
-- **GitOps Management:** The entire Argo CD deployment is managed by an Argo CD `Application` manifest located in the `spitikos/spitikos` repository at `argocd/apps/argocd.yaml`.
-
-This self-management pattern ensures that the configuration for Argo CD itself is version-controlled and reproducible.
-
-### Ingress and Access
-
-Argo CD is accessible at **https://argocd.spitikos.dev**. The official Helm chart has built-in capabilities to create a correctly configured `Ingress` resource for NGINX, which is enabled in our `values.yaml`.
+Unlike other applications, this root chart is not managed by Argo CD itself (to avoid a "chicken-and-egg" problem). Instead, it is installed and upgraded manually via a `helm` command, which has been added to the project's `taskfile.yaml` for convenience.
 
 ### "App of Apps" Pattern
 
-We use the "App of Apps" pattern to manage our application landscape.
+We use the "App of Apps" pattern to manage our application landscape. The `charts/argocd` chart is the "root" application.
 
-- **Root Application:** A single `Application` manifest, `argocd/root-app.yaml` in the `spitikos/spitikos` repo, is manually applied to the cluster after the initial Argo CD installation. This is the only imperative step.
-- **App Discovery:** The `root` application is configured to monitor the `argocd/apps/` directory in the `spitikos/spitikos` repository.
-- **Child Applications:** For every `.yaml` file in the `argocd/apps/` directory, Argo CD automatically creates a corresponding `Application`. Each of these files defines a service (e.g., `homepage`, `nginx`), pointing to its Helm chart in the **`spitikos/charts`** repository.
+- **Single Source of Truth:** The `charts/argocd/values.yaml` file contains a list of all applications that should be deployed to the cluster.
+- **Application Discovery:** The `charts/argocd/templates/applications.yaml` template ranges over this list and generates a corresponding Argo CD `Application` manifest for each entry.
+- **Child Applications:** Each generated `Application` manifest points to its own Helm chart in the **`spitikos/charts`** repository.
 
-This pattern ensures that adding a new application to the cluster is as simple as adding a new `Application` manifest to the `argocd/apps/` directory and committing it to Git.
+This pattern ensures that adding a new application to the cluster is as simple as adding a new entry to the `applications` list in the root `values.yaml` file and committing it to Git.
+
+### Handling Autoscaling
+
+When an application is configured for autoscaling with KEDA, the number of pods is controlled by the autoscaler, not by the `replicaCount` value in Git. This creates a conflict that must be resolved.
+
+We instruct Argo CD to ignore the replica count for autoscaled applications by adding an `ignoreDifferences` block to their definition in the `argocd/values.yaml` file.
+
+```yaml
+- name: homepage
+  # ... other fields
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas
+```
+
+This tells Argo CD to allow the KEDA autoscaler to manage the pod count freely without marking the application as `OutOfSync`.

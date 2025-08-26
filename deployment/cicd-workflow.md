@@ -31,12 +31,7 @@ The pipeline is a chain reaction that starts with a `git push` to an application
 - Tags the image with the short commit SHA of the triggering commit.
 - Pushes the new image to the GitHub Container Registry (ghcr.io).
 
-#### Job 2: `set-package-public`
-
-- This job runs after `docker-publish` succeeds.
-- It uses the GitHub CLI to programmatically set the visibility of the newly published package to **public**. This ensures all application images are accessible to the cluster without requiring image pull secrets.
-
-#### Job 3: `update-chart`
+#### Job 2: `update-chart`
 
 - This job runs only after `docker-publish` succeeds.
 - It checks out the **`spitikos/charts`** repository.
