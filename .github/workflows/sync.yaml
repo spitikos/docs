@@ -1,4 +1,4 @@
-name: Sync
+name: Sync Docs with Spitikos Backend
 
 on:
   push:
@@ -15,11 +15,11 @@ jobs:
     name: Send Webhook
     runs-on: ubuntu-latest
     steps:
-      - name: Setup curl
+      - name: Setup cURL
         run: sudo apt install curl -y
 
-      - name: Send webhook
+      - name: Send Webhook
         run: |
           curl --header "Content-Type: application/json" \
               --data '{"Slugs": ["test1", "test2"]}' \
-              https://api.spitikos.dev/docs.DocsService.Sync
+              https://api.spitikos.dev/docs.DocsService/Sync
