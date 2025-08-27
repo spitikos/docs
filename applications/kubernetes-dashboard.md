@@ -8,7 +8,7 @@ Like all other components in this project, the Kubernetes Dashboard is deployed 
 
 - **Wrapper Chart:** We use a wrapper chart located in the `spitikos/charts` repository at `charts/kube-dashboard`. This chart includes the official `kubernetes-dashboard/kubernetes-dashboard` chart as a dependency.
 - **Declarative Configuration:** All configuration is defined in `charts/kube-dashboard/values.yaml` in the `spitikos/charts` repository.
-- **GitOps Management:** The dashboard is deployed and managed by an Argo CD `Application` manifest in the `spitikos/spitikos` repository. To deploy, modify, or remove the dashboard, a change is made in the `spitikos/charts` repository and pushed to Git. Argo CD handles the rest.
+- **GitOps Management:** The dashboard is deployed and managed as an application within the root Argo CD chart. Its configuration is defined as an entry in `charts/argocd/values.yaml`. To deploy, modify, or remove the dashboard, a change is made in the `spitikos/charts` repository and pushed to Git. Argo CD handles the rest.
 
 ## 2. Ingress and Networking
 

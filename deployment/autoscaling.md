@@ -10,7 +10,7 @@ To enable scaling based on real-time traffic, we use a combination of KEDA and t
 - **Prometheus Scaler:** We use KEDA's built-in Prometheus scaler to query the cluster's Prometheus instance for application-specific metrics.
 - **NGINX Metrics:** The NGINX Ingress Controller automatically exposes a Prometheus metric called `nginx_ingress_controller_requests`, which includes a `service` label identifying the backend application. This is the key metric we use to measure traffic.
 
-The most important feature KEDA provides is the ability to **scale deployments down to zero replicas** when there is no traffic, and scale them back up to one when the first request comes in. This is ideal for the resource-constrained Raspberry Pi environment.
+The most important feature KEDA provides is the ability to **scale deployments down to zero replicas** when there is no traffic. While we have configured our applications with a minimum of one replica, this scale-to-zero capability remains a powerful option for future use cases and is a key reason for choosing KEDA over the standard HPA.
 
 ## 2. Implementation
 

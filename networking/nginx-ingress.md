@@ -8,7 +8,7 @@ NGINX is a critical piece of the platform infrastructure. As such, it is managed
 
 - **Wrapper Chart:** The configuration is defined in a dedicated **wrapper chart** located in the `spitikos/charts` repository at `charts/nginx`. This chart includes the official `ingress-nginx` chart as a dependency.
 - **Declarative Configuration:** All configuration is defined in the `charts/nginx/values.yaml` file in the `spitikos/charts` repository.
-- **GitOps Management:** The entire NGINX deployment is managed by an Argo CD `Application` manifest located in the `spitikos/spitikos` repository at `argocd/apps/nginx.yaml`. Argo CD ensures that the NGINX deployment in the cluster always matches the configuration defined in the `charts` repository.
+- **GitOps Management:** The entire NGINX deployment is managed as an application within the root Argo CD chart. Its configuration is defined as an entry in `charts/argocd/values.yaml`. Argo CD ensures that the NGINX deployment in the cluster always matches the configuration defined in the `charts` repository.
 
 ## 2. Key Configuration Choices
 
