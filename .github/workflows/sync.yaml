@@ -15,21 +15,21 @@ jobs:
     name: Send Webhook
     runs-on: ubuntu-latest
     steps:
-      - name: Setup cURL
-        run: sudo apt install curl -y
-
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: List Doc paths
+      - name: List Doc Paths
         id: list_paths
         run: |
-          paths=$(find . -type f -name "*.md" | sed 's|^\./||' | jq -R . | jq -s .)
+          paths=$(find . -type f -name "*.md" | sed 's|^./||' | jq -R . | jq -s -c .)
           echo "paths=$paths" >> $GITHUB_OUTPUT
 
-      - name: Send Webhook with Paths
+      - name: Send Sync Request
+        env:
+          API_URL: https://api.spitikos.dev/docs.v1.DocsService/Sync
+          PATHS_PAYLOAD: ${{ steps.list_paths.outputs.paths }}
         run: |
-          paths=${{ steps.list_paths.outputs.paths }}
-          curl --header "Content-Type: application/json" \
-              --data '{"paths": $paths}' \
-              https://api.spitikos.dev/docs.DocsService/Sync
+          curl --verbose \
+            --header "Content-Type: application/json" \
+            --data "{\"paths\": ${PATHS_PAYLOAD}}" \
+            "${API_URL}"
