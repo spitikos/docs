@@ -29,7 +29,7 @@ jobs:
           API_URL: https://api.spitikos.dev/docs.v1.DocsService/Sync
           PATHS_PAYLOAD: ${{ steps.list_paths.outputs.paths }}
         run: |
-          curl --verbose \
+          curl \
             --header "Content-Type: application/json" \
-            --data "{\"paths\": ${PATHS_PAYLOAD}}" \
+            --data '{"paths": "${PATHS_PAYLOAD}"}' \
             "${API_URL}"
