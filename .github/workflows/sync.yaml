@@ -26,12 +26,11 @@ jobs:
 
       - name: Send Sync Request
         env:
-          API_URL: https://api.spitikos.dev/docs.v1.DocsService/SyncDocuments
+          API_URL: https://api.spitikos.dev:443/docs.DocsService/Sync
           PATHS_JSON: ${{ steps.list_paths.outputs.paths }}
         run: |
           json_payload=$(printf '{"paths": %s}' "$PATHS_JSON")
 
-          # Send the request
           curl --verbose \
             --header "Content-Type: application/json" \
             --data "${json_payload}" \
