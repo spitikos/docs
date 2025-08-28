@@ -1,4 +1,4 @@
-# Documentation: Ingress Architecture
+# Core Concept: Ingress Architecture
 
 This document details the architecture for exposing services to the public internet. It covers the components involved, the final working configuration, and the rationale behind the design choices, informed by significant troubleshooting.
 

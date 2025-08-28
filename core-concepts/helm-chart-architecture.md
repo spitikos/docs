@@ -1,4 +1,4 @@
-# Documentation: Helm Chart Architecture
+# Core Concept: Helm Chart Architecture
 
 This document explains the reusable and maintainable Helm chart architecture used in this project. The design is based on the idiomatic **Wrapper Chart** pattern, with all charts being centrally managed in the dedicated `spitikos/charts` repository.
 

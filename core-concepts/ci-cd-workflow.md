@@ -1,4 +1,4 @@
-# Documentation: CI/CD and GitOps Workflow
+# Core Concept: CI/CD & GitOps Workflow
 
 This document explains the project's fully automated CI/CD pipeline, which is designed for a multi-repo structure and enables a seamless GitOps workflow with Argo CD.
 
@@ -8,7 +8,7 @@ The project is split into multiple repositories to enforce separation of concern
 
 - **Application Repositories** (e.g., `spitikos/homepage`): Contain the source code for a single application.
 - **`spitikos/charts`**: A dedicated repository containing all Helm charts.
-- **`spitikos/docs`**: A dedicated repository containing all project documentation.
+- **`spitikos/docs`**: A dedicated repository containing all project documentation. On push, a GitHub Actions workflow sends a webhook to the `api` service to trigger a content refresh.
 - **`spitikos/spitikos`**: The central repository containing Argo CD manifests and reusable CI/CD workflows.
 
 ## 2. The CI/CD Pipeline: From Code to Live Deployment

@@ -1,4 +1,4 @@
-# Documentation: NGINX Ingress Controller
+# Reference: NGINX Ingress Controller
 
 This document covers the installation and configuration of the NGINX Ingress Controller, which is responsible for routing external traffic to the correct services within the Kubernetes cluster.
 
@@ -19,4 +19,4 @@ The configuration in `charts/nginx/values.yaml` is minimal, relying on the offic
 
 ## 3. Exposing Services
 
-Services are exposed using the standard Kubernetes `Ingress` resource. To maintain consistency, all application charts use a common template. For details on this, and for the specific annotations required for gRPC, see the main `12-ingress-architecture.md` document.
+Services are exposed using the standard Kubernetes `Ingress` resource. To maintain consistency, all application charts use a common template. For details on this, and for the specific annotations required for gRPC, see the main `core-concepts/ingress-architecture.md` document.

@@ -1,4 +1,4 @@
-# Documentation: Remote & Local Development
+# Guide: Local & Remote Development
 
 This document explains the different methods for interacting with the cluster from your local machine, both for direct management and for application development.
 

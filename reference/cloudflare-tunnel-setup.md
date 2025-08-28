@@ -1,4 +1,4 @@
-# Documentation: Cloudflare Tunnel
+# Reference: Cloudflare Tunnel Setup
 
 This document explains the final, working configuration for `cloudflared`, which creates a secure, outbound-only connection from the cluster to the Cloudflare network. This exposes services to the internet without opening any firewall ports.
 

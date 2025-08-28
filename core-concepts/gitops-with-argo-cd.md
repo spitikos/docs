@@ -1,4 +1,4 @@
-# Documentation: GitOps with Argo CD
+# Core Concept: GitOps with Argo CD
 
 This document describes the GitOps workflow used in this project, which is powered by Argo CD. GitOps is a paradigm where the entire desired state of the system is declaratively defined in a Git repository.
 

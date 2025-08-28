@@ -1,4 +1,4 @@
-# Documentation: Autoscaling with KEDA
+# Guide: Enabling Autoscaling
 
 This document explains the event-driven autoscaling strategy used for applications in this project, which is powered by KEDA.
 

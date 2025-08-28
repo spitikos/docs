@@ -1,6 +1,6 @@
-# Documentation: Kubernetes Dashboard
+# Guide: Accessing the Kubernetes Dashboard
 
-This document details the deployment of the Kubernetes Dashboard, a general-purpose web UI for Kubernetes clusters.
+This document details the deployment of the Kubernetes Dashboard and explains how to access it.
 
 ## 1. Architecture: Declarative Deployment via GitOps
 

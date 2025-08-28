@@ -1,4 +1,4 @@
-# Documentation: Naming Conventions
+# Reference: Naming Conventions
 
 This document outlines the strict naming conventions used across the project. Consistency is critical for the automation and GitOps workflows to function correctly.
 

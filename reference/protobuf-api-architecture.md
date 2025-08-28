@@ -1,4 +1,4 @@
-# Documentation: Protobuf API Architecture
+# Reference: Protobuf & gRPC API Architecture
 
 This document outlines the architecture for managing and consuming Protobuf API definitions across different services in the project.
 

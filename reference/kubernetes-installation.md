@@ -1,4 +1,4 @@
-# Documentation: k3s Installation
+# Reference: Kubernetes (k3s) Installation
 
 This document details the installation of the k3s Kubernetes distribution and the configuration of `kubectl` for remote management.
 

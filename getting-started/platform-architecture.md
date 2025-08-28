@@ -1,4 +1,4 @@
-# Documentation: Architecture Overview
+# Platform Architecture
 
 This document provides a high-level overview of the architecture, design patterns, and core concepts used in this project.
 
@@ -26,6 +26,7 @@ The platform consists of several key layers:
 | **Autoscaling**             | KEDA              | Provides event-driven, scale-to-zero autoscaling for applications.                                 |
 | **Public Ingress**          | Cloudflare Tunnel | Provides a secure, outbound-only connection to the Cloudflare network, handling TLS termination.   |
 | **Internal Ingress**        | NGINX             | Routes traffic within the cluster from the tunnel to the correct service based on hostname.        |
+| **Application Caching**     | Redis             | Provides a high-performance, in-memory cache for processed data, such as documentation.      |
 | **Application Packaging**   | Helm              | Manages Kubernetes deployments using a reusable "wrapper chart" pattern.                           |
 | **Continuous Integration**  | GitHub Actions    | Builds and pushes container images; automatically updates Helm values in the `charts` repository.  |
 | **Continuous Deployment**   | Argo CD           | Detects changes in the `charts` repository and automatically syncs them to the Kubernetes cluster. |
@@ -37,6 +38,6 @@ The platform is organized across multiple repositories in the `spitikos` organiz
 - **`spitikos/spitikos`**: The central repository. It contains:
   - `argocd/`: Argo CD application manifests that define what should be deployed.
   - `.github/workflows/`: Reusable GitHub Actions workflows for CI/CD.
-- **`spitikos/docs`**: Contains all project documentation.
-- **`spitkos/charts`**: Contains all the Helm charts for deploying applications and platform services.
-- **`spitikos/<app-name>`** (e.g., `spitikos/homepage`): Each application has its own repository containing its source code and a CI workflow file.
+- **`spitikos/api`**: The monolithic backend server. It provides all gRPC services for the platform, including the `DocsService` which powers the documentation website.
+- **`spitikos/docs`**: Contains all project documentation. Changes to this repository trigger a webhook to the `api` service to recache the content.
+- **`spitikos/charts`**: Contains all the Helm charts for deploying applications and platform services.

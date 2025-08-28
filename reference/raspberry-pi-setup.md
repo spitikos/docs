@@ -1,4 +1,4 @@
-# Documentation: Initial Raspberry Pi Setup
+# Reference: Raspberry Pi Setup
 
 This document covers the initial network configuration for the Raspberry Pi to ensure it has a stable presence on the local network.
 
