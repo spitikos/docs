@@ -26,7 +26,7 @@ jobs:
 
       - name: Send Sync Request
         env:
-          API_URL: https://api.spitikos.dev/docs.v1.DocsService/Sync
+          API_URL: https://api.spitikos.dev:50051/docs.DocsService/Sync
           PATHS_PAYLOAD: ${{ steps.list_paths.outputs.paths }}
         run: |
           curl \
