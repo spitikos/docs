@@ -44,7 +44,7 @@ This is the best practice. It creates a background service that starts automatic
             <string>access</string>
             <string>tcp</string>
             <string>--hostname</string>
-            <string>k8s.spitikos.dev</string>
+            <string>k8s.taehoonlee.cloud</string>
             <string>--url</string>
             <string>localhost:6443</string>
         </array>
@@ -68,7 +68,7 @@ Use this method if you only need temporary access.
 
 1.  **Run the proxy command** in a dedicated terminal window. You must leave this window open.
     ```bash
-    cloudflared access tcp --hostname k8s.spitikos.dev --url localhost:6443
+    cloudflared access tcp --hostname k8s.taehoonlee.cloud --url localhost:6443
     ```
 
 #### `kubeconfig` Setup (For Both Methods)
@@ -80,9 +80,8 @@ Your `~/.kube/config` file should use the original certificate data from the Pi,
 3.  **Change only the `server` line** to point to the local proxy:
     `diff
     - server: https://127.0.0.1:6443
-    + server: https://localhost:6443
-    `
-    Your `kubectl` commands will now work seamlessly from any network.
+    * server: https://localhost:6443
+      `Your`kubectl` commands will now work seamlessly from any network.
 
 ## 2. Local Application Development with Telepresence
 
