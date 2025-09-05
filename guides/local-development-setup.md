@@ -13,12 +13,12 @@ The tunnel is configured to proxy SSH traffic. To connect:
 1.  **Ensure `cloudflared` is installed** on your local machine (`brew install cloudflared`).
 2.  **Add the following to your `~/.ssh/config` file:**
     ```
-    Host pi.spitikos.dev
-      HostName ssh.spitikos.dev
+    Host cloud
+      HostName ssh.taehoonlee.cloud
       ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h
     ```
     _(Note: Verify the path to your `cloudflared` executable by running `which cloudflared`)_
-3.  **Connect:** You can now simply run `ssh pi.spitikos.dev`.
+3.  **Connect:** You can now simply run `ssh cloud`.
 
 ### 1.2. Remote `kubectl` Access via TCP Tunnel
 

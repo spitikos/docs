@@ -50,23 +50,23 @@ credentials-file: <YOUR_CREDENTIALS_FILE_PATH>
 
 ingress:
   # This rule handles gRPC traffic for the API server.
-  - hostname: api.spitikos.dev
+  - hostname: api.taehoonlee.cloud
     service: https://10.0.0.200:443
     originRequest:
       noTLSVerify: true
       http2Origin: true
 
   # This is a consistent catch-all for all other HTTPS traffic.
-  - hostname: "*.spitikos.dev"
+  - hostname: "*.taehoonlee.cloud"
     service: https://10.0.0.200:443
     originRequest:
       noTLSVerify: true
       http2Origin: true
 
   # Other rules for non-HTTP services.
-  - hostname: "k8s.spitikos.dev"
+  - hostname: "k8s.taehoonlee.cloud"
     service: "tcp://127.0.0.1:6443"
-  - hostname: "ssh.spitikos.dev"
+  - hostname: "ssh.taehoonlee.cloud"
     service: "ssh://127.0.0.1:22"
 
   # Final catch-all

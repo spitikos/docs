@@ -74,23 +74,23 @@ This is the definitive, working configuration for the entire platform.
     ```yaml
     ingress:
       # This rule handles gRPC traffic for the API server.
-      - hostname: api.spitikos.dev
+      - hostname: api.taehoonlee.cloud
         service: https://10.0.0.200:443
         originRequest:
           noTLSVerify: true
           http2Origin: true
 
       # This is a consistent catch-all for all other HTTPS traffic.
-      - hostname: "*.spitikos.dev"
+      - hostname: "*.taehoonlee.cloud"
         service: https://10.0.0.200:443
         originRequest:
           noTLSVerify: true
           http2Origin: true
 
       # Other rules for SSH, etc.
-      - hostname: "k8s.spitikos.dev"
+      - hostname: "k8s.taehoonlee.cloud"
         service: "tcp://127.0.0.1:6443"
-      - hostname: "ssh.spitikos.dev"
+      - hostname: "ssh.taehoonlee.cloud"
         service: "ssh://127.0.0.1:22"
 
       # Final catch-all
@@ -99,7 +99,7 @@ This is the definitive, working configuration for the entire platform.
 
 ### Component 4: Cloudflare DNS
 
-*   **Role:** To direct all traffic for `spitikos.dev` and its subdomains to the Cloudflare network, where the Tunnel can pick it up.
+*   **Role:** To direct all traffic for `taehoonlee.cloud` and its subdomains to the Cloudflare network, where the Tunnel can pick it up.
 *   **Configuration:** All records are `CNAME`s pointing to the tunnel's unique ID.
     *   **Type:** `CNAME`
     *   **Name:** `api` (or `homepage`, `@`, etc.)
@@ -112,13 +112,13 @@ This is the definitive, working configuration for the entire platform.
 
 The final, working data path for a gRPC request is as follows:
 
-1.  **Client** sends a gRPC request to `api.spitikos.dev`.
+1.  **Client** sends a gRPC request to `api.taehoonlee.cloud`.
 2.  **Cloudflare DNS** resolves to a Cloudflare IP.
 3.  **Cloudflare Edge** receives the request, terminates the public TLS, and sees that it's for a Tunnel.
 4.  The request is sent through the secure **Cloudflare Tunnel** using the HTTP/2 protocol.
 5.  The **`cloudflared` agent** on the Pi receives the request.
 6.  `cloudflared` makes a new `https` request to the **K3s Load Balancer** at `10.0.0.200:443`.
 7.  The K3s Load Balancer forwards the traffic to the **NGINX Ingress pod**.
-8.  **NGINX** terminates the internal TLS, sees the `Host` is `api.spitikos.dev`, and reads the `backend-protocol: "GRPC"` annotation.
+8.  **NGINX** terminates the internal TLS, sees the `Host` is `api.taehoonlee.cloud`, and reads the `backend-protocol: "GRPC"` annotation.
 9.  NGINX forwards the request as gRPC to the **`api` service**.
 10. The `api` service sends the request to the **`api` pod**, which processes it.

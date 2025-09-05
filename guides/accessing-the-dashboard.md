@@ -12,7 +12,7 @@ Like all other components in this project, the Kubernetes Dashboard is deployed 
 
 ## 2. Ingress and Networking
 
-The dashboard is exposed at **https://kube.spitikos.dev**.
+The dashboard is exposed at **https://kube.taehoonlee.cloud**.
 
 The wrapper chart contains a standard `Ingress` template that is managed by the NGINX Ingress Controller.
 
@@ -31,6 +31,6 @@ The dashboard is configured to use token-based authentication. The Helm chart cr
 2.  **Copy the token** that is printed to the console.
 
 3.  **Access the Dashboard:**
-    - Navigate to **https://kube.spitikos.dev**.
+    - Navigate to **https://kube.taehoonlee.cloud**.
     - Select the **Token** authentication method.
     - Paste the token into the field and click **Sign in**.

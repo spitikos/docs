@@ -48,7 +48,7 @@ This process is safe from downtime because the `homepage` frontend uses Next.js'
 
 ## 3. Required Configuration
 
-For this system to function, the `api` service requires the following environment variables, which are mounted from Kubernetes Secrets:
+For this system to function, the `api` service requires the following environment variables, which are dynamically injected by HashiCorp Vault at runtime:
 
 -   `GITHUB_TOKEN`: A GitHub Personal Access Token with permission to read the `spitikos/docs` repository.
 -   `GITHUB_WEBHOOK_SECRET`: The shared secret used to validate payloads from the GitHub webhook.
